@@ -1,9 +1,10 @@
-import Main from "./components/(without-auth)/Main";
+import Main from "./(without-auth)/Main";
+import { UserStoreProvider } from "../providers/UserProvider";
 
 export default function Home() {
   return (
-    <div className="">
+    <UserStoreProvider>
       <Main />
-    </div>
+    </UserStoreProvider>
   );
 }

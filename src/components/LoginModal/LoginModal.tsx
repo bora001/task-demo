@@ -11,7 +11,11 @@ import "./login-modal.css";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import userList from "@api/user_list.json";
+import { useUserStore } from "@/providers/UserProvider";
+import { useRouter } from "next/navigation";
 const LoginModal = () => {
+  const { setUser } = useUserStore((state) => state);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -20,8 +24,13 @@ const LoginModal = () => {
 
   const [isVisiblePwd, setIsVisiblePwd] = useState(false);
   const onSubmit = (data: FieldValues) => {
-    const user = userList.find((item) => item.userEmail === data.email);
-    console.log("user", user);
+    const { userName, userRole } = userList.find(
+      (item) => item.userEmail === data.email
+    ) || { userName: null, userRole: null };
+    if (userName && userRole) {
+      setUser({ userName, userRole });
+      router.push("/users");
+    }
   };
 
   return (

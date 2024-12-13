@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import InviteUser from "./InviteUser";
 import SelectRole from "./SelectRole";
 import UserList from "./UserList";
@@ -11,12 +14,23 @@ export type UserListType = {
   lastLoggedInAt: string;
 };
 const UserContent = () => {
+  const [selectRole, setSelectRole] = useState<string[]>([]);
+  const [userList, setUserList] = useState<UserListType[]>(list);
+  useEffect(() => {
+    if (selectRole.length) {
+      const newList = list.filter((item) => selectRole.includes(item.userRole));
+      setUserList(newList);
+    } else {
+      setUserList(list);
+    }
+  }, [selectRole, selectRole.length]);
+
   return (
-    <div>
+    <>
       <InviteUser />
-      <SelectRole list={list} />
-      <UserList list={list} />
-    </div>
+      <SelectRole {...{ list, selectRole, setSelectRole }} />
+      <UserList list={userList} />
+    </>
   );
 };
 

@@ -26,7 +26,7 @@ const SelectTask = ({ list }: { list: TaskListType[] }) => {
   };
   return (
     <div className="">
-      <SelectIndicator />
+      <SelectIndicator count={list.length} />
       <SelectRow
         title="Task Type"
         list={TASK_LIST}

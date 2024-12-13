@@ -12,13 +12,19 @@ import { useMemo, useState } from "react";
 import { formatTime } from "@/utils/default-time-setting";
 import CommonTable from "../Table/CommonTable";
 import { TaskListType } from "./TaskContent";
+import { CardStackIcon } from "@radix-ui/react-icons";
 
 const UserTaskList = ({ list }: { list: TaskListType[] }) => {
   const columns: ColumnDef<TaskListType>[] = useMemo(
     () => [
       {
         accessorKey: "taskName",
-        header: () => <>Task Name</>,
+        header: () => (
+          <div className="flex gap-2 items-center">
+            <CardStackIcon className="text-teal-800" />
+            Task Name
+          </div>
+        ),
         cell: (info) => info.getValue(),
       },
       {

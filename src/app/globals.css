@@ -21,3 +21,7 @@ body {
   position: fixed;
   inset: 0;
 }
+
+.test {
+  border: 3px solid red;
+}

@@ -11,8 +11,8 @@ const CheckBox = ({
     <div
       onClick={onClick}
       className={`${
-        isChecked ? `bg-teal-700 text-white` : "bg-gray-50 text-teal-700"
-      } rounded-sm  cursor-pointer`}
+        isChecked ? `bg-teal-700 text-white` : " text-teal-700"
+      } border border-teal-700 rounded-sm  cursor-pointer`}
     >
       <CheckIcon />
     </div>

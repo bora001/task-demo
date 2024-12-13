@@ -9,8 +9,7 @@ const Header = ({ title }: { title: string }) => {
   return (
     <div className="flex justify-between h-[100px]">
       <h2 className="font-bold text-xl">{title}</h2>
-
-      <div className="flex items-center gap-2">
+      <div className="flex gap-2">
         <div className="flex gap-2">
           <p>{userName}</p>
           <p className="text-blue-500">{userRole}</p>

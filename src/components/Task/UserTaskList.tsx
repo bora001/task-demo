@@ -11,40 +11,56 @@ import {
 import { useMemo, useState } from "react";
 import { formatTime } from "@/utils/default-time-setting";
 import CommonTable from "../Table/CommonTable";
-import { UserListType } from "./UserContent";
+import { TaskListType } from "./TaskContent";
 
-const UserList = ({ list }: { list: UserListType[] }) => {
-  const columns: ColumnDef<UserListType>[] = useMemo(
+const UserTaskList = ({ list }: { list: TaskListType[] }) => {
+  const columns: ColumnDef<TaskListType>[] = useMemo(
     () => [
       {
-        accessorKey: "userName",
+        accessorKey: "taskName",
+        header: () => <>Task Name</>,
         cell: (info) => info.getValue(),
       },
       {
-        accessorKey: "userEmail",
-        cell: (info) => info.getValue(),
-      },
-      {
-        accessorKey: "userRole",
-        cell: (info) => info.getValue(),
-      },
-      {
-        accessorKey: "userPhone",
+        accessorKey: "taskType",
+        header: () => <>Task Type</>,
         cell: (info) => info.getValue(),
       },
       {
         accessorKey: "createdAt",
+        header: () => <>Created At</>,
         cell: (info) => formatTime(info.getValue() as string),
       },
       {
-        accessorKey: "lastLoggedInAt",
+        accessorKey: "dueDate",
+        header: () => <>Due Date</>,
         cell: (info) => formatTime(info.getValue() as string),
+      },
+      {
+        accessorKey: "reporter",
+        header: () => <>Reporter</>,
+        cell: (info) => info.getValue(),
+      },
+      {
+        accessorKey: "taskDescription",
+        header: () => <>Description</>,
+        cell: (info) => info.getValue(),
+      },
+      {
+        accessorKey: "assignee",
+        header: () => <>담당자(Assignee)</>,
+        cell: (info) => info.getValue(),
+      },
+      {
+        accessorKey: "status",
+        header: () => <>상태(Status)</>,
+        cell: (info) => info.getValue(),
       },
     ],
     []
   );
 
-  // const [data, setData] = useState<UserListType[]>(list);
+  // const [data, setData] = useState<TaskListType[]>(list);
   //   const refreshData = () => setData((_old) => makeData(50_000)); //stress test
   const [sorting, setSorting] = useState<SortingState>([]);
 
@@ -70,4 +86,4 @@ const UserList = ({ list }: { list: UserListType[] }) => {
   return <CommonTable table={table} setSorting={setSorting} />;
 };
 
-export default UserList;
+export default UserTaskList;

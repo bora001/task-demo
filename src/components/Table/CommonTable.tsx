@@ -79,27 +79,37 @@ const CommonTable = <T,>({ table, setSorting }: CommonTableProps<T>) => {
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map((row) => {
-            return (
-              <tr key={row.id} className="border-b-2 h-[50px]">
-                {row.getVisibleCells().map((cell) => {
-                  return (
-                    <td key={cell.id} className="p-3">
-                      {cell.id.includes("At")
-                        ? formatTime(cell.getValue() as string)
-                        : flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
+          {table.getRowModel().rows.length ? (
+            table.getRowModel().rows.map((row) => {
+              return (
+                <tr key={row.id} className="border-b-2 h-[50px]">
+                  {row.getVisibleCells().map((cell) => {
+                    return (
+                      <td key={cell.id} className="p-3">
+                        {cell.id.includes("At")
+                          ? formatTime(cell.getValue() as string)
+                          : flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })
+          ) : (
+            <tr>
+              <td
+                colSpan={table.getAllColumns().length}
+                className="text-center py-4"
+              >
+                데이터가 없습니다.
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
-      <div className="h-2" />
     </div>
   );
 };

@@ -19,7 +19,7 @@ const SelectRole = ({
 }) => {
   const { selectQuery } = useFilterItems({
     setSelectQuery: setSelectRole,
-    type: "role",
+    type: "userRole",
   });
 
   const uniqueUserRoles = [...new Set(list.map((item) => item.userRole))];

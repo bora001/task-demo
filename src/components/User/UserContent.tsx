@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import InviteUser from "./InviteUser";
 import SelectRole from "./SelectRole";
 import UserList from "./UserList";
 import list from "@api/user_list.json";
+import useFilterList from "@/hooks/useFilterList";
 export type UserListType = {
   userName: string;
   userPhone: string;
@@ -16,14 +17,7 @@ export type UserListType = {
 const UserContent = () => {
   const [selectRole, setSelectRole] = useState<string[]>([]);
   const [userList, setUserList] = useState<UserListType[]>(list);
-  useEffect(() => {
-    if (selectRole.length) {
-      const newList = list.filter((item) => selectRole.includes(item.userRole));
-      setUserList(newList);
-    } else {
-      setUserList(list);
-    }
-  }, [selectRole, selectRole.length]);
+  useFilterList({ setList: setUserList, list });
 
   return (
     <>

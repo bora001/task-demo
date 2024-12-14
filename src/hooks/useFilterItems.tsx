@@ -7,7 +7,7 @@ const useFilterItems = ({
   setSelectQuery,
   type,
 }: {
-  type: string;
+  type: string; // type은 항상 객체 키값
   setSelectQuery: Dispatch<SetStateAction<string[]>>;
 }) => {
   const router = useRouter();

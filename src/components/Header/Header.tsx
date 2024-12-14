@@ -4,7 +4,6 @@ import { PersonIcon } from "@radix-ui/react-icons";
 
 const Header = ({ title }: { title: string }) => {
   const { userName, userRole } = useUserStore((state) => state);
-  console.log("userName, userRole", userName, userRole);
 
   return (
     <div className="flex justify-between h-[100px]">

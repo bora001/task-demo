@@ -33,7 +33,7 @@ const SelectTask = ({
   }));
   const { selectQuery: setTaskQuery } = useFilterItems({
     setSelectQuery: setSelectTask,
-    type: "task",
+    type: "taskName",
   });
   const { selectQuery: setStatusQuery } = useFilterItems({
     setSelectQuery: setSelectStatus,

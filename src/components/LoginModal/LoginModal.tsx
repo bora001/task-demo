@@ -13,6 +13,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import userList from "@api/user_list.json";
 import { useUserStore } from "@/providers/UserProvider";
 import { useRouter } from "next/navigation";
+import { MENU_LIST } from "@/app/(with-auth)/Side";
 const LoginModal = () => {
   const { setUser } = useUserStore((state) => state);
   const router = useRouter();
@@ -29,7 +30,11 @@ const LoginModal = () => {
     ) || { userName: null, userRole: null };
     if (userName && userRole) {
       setUser({ userName, userRole });
-      router.push("/users");
+      const path = MENU_LIST.filter((item) =>
+        item.allowList?.includes(userRole)
+      );
+      console.log("path", path[0].href ?? MENU_LIST[0].href);
+      router.push(path[0].href ?? MENU_LIST[0].href);
     }
   };
 

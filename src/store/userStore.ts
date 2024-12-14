@@ -8,6 +8,7 @@ export type UserState = {
 
 export type UserActions = {
   setUser: (user: UserState) => void;
+  resetUser: () => void;
 };
 
 export type UserStore = UserState & UserActions;
@@ -24,6 +25,7 @@ export const createUserStore = (initState: UserState = defaultInitState) => {
         ...initState,
         setUser: ({ userName, userRole }) =>
           set(() => ({ userName, userRole })),
+        resetUser: () => set(() => defaultInitState),
       }),
       {
         name: "user-session",

@@ -1,10 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import CreateTask from "./CreateTask";
 import SelectTask from "./SelectTask";
 import UserTaskList from "./UserTaskList";
 import list from "@api/task_list.json";
 import useFilterList from "@/hooks/useFilterList";
+import { useUserStore } from "@/providers/UserProvider";
 
 export type TaskListType = {
   taskType: string;
@@ -21,8 +22,19 @@ export type TaskListType = {
 const TaskContent = () => {
   const [selectTask, setSelectTask] = useState<string[]>([]);
   const [selectStatus, setSelectStatus] = useState<string[]>([]);
-  const [taskList, setTaskList] = useState<TaskListType[]>(list);
-  useFilterList({ setList: setTaskList, list });
+  const { userRole, userName } = useUserStore((state) => state);
+  const filteredList = useMemo(() => {
+    if (userRole === "RegularUser") {
+      return list.filter((item) => item.reporter === userName);
+    } else if (userRole === "Viewer") {
+      return list.filter((item) => item.assignee === userName);
+    } else {
+      return list;
+    }
+  }, [userName, userRole]);
+
+  const [taskList, setTaskList] = useState<TaskListType[]>(filteredList);
+  useFilterList({ setList: setTaskList, list: filteredList });
 
   return (
     <div className="flex flex-col max-h-[calc(100vh-32px)]">

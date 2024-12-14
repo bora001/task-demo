@@ -1,6 +1,5 @@
 import Header from "@/components/Header/Header";
 import UserContent from "@/components/User/UserContent";
-import React from "react";
 
 const Users = () => {
   return (

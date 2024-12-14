@@ -1,3 +1,4 @@
+import { useUserStore } from "@/providers/UserProvider";
 import CustomSelect from "../CustomSelect";
 import SearchInput from "../SearchInput";
 import useSetSelect from "@/hooks/useSetSelect";
@@ -10,6 +11,8 @@ const SELECT_LIST = [
 
 const InviteUser = () => {
   const { setSelect, searchHandler } = useSetSelect();
+  const { userRole } = useUserStore((state) => state);
+  const notAllowed = userRole !== "Admin";
 
   return (
     <div className="flex gap-5 items-center">
@@ -17,8 +20,12 @@ const InviteUser = () => {
         <CustomSelect list={SELECT_LIST} setSelect={setSelect} />
         <SearchInput searchHandler={searchHandler} />
       </div>
-
-      <button className="btn">Invite User</button>
+      <button
+        className={notAllowed ? "btn-disabled" : "btn"}
+        disabled={notAllowed}
+      >
+        Invite User
+      </button>
     </div>
   );
 };

@@ -28,7 +28,9 @@ const UserContent = () => {
   return (
     <>
       <InviteUser />
-      <SelectRole {...{ list, selectRole, setSelectRole }} />
+      <SelectRole
+        {...{ list, selectRole, setSelectRole, count: userList.length }}
+      />
       <UserList list={userList} />
     </>
   );

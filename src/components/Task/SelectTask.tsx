@@ -1,12 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import SelectIndicator from "../SelectIndicator";
 import SelectRow from "../SelectRow";
 import { TaskListType } from "./TaskContent";
+import useFilterItems from "@/hooks/useFilterItems";
 
-const SelectTask = ({ list }: { list: TaskListType[] }) => {
-  const [selectRole, setSelectRole] = useState<string[]>([]);
+const SelectTask = ({
+  list,
+  selectTask,
+  setSelectTask,
+  selectStatus,
+  setSelectStatus,
+  count,
+}: {
+  list: TaskListType[];
+  selectTask: string[];
+  selectStatus: string[];
+  setSelectTask: Dispatch<SetStateAction<string[]>>;
+  setSelectStatus: Dispatch<SetStateAction<string[]>>;
+  count: number;
+}) => {
   const uniqueTaskName = [...new Set(list.map((item) => item.taskName))];
   const uniqueStatus = [...new Set(list.map((item) => item.status))];
   const TASK_LIST = uniqueTaskName.map((task) => ({
@@ -17,27 +31,29 @@ const SelectTask = ({ list }: { list: TaskListType[] }) => {
     label: status,
     option: status,
   }));
-  const selectUserRole = (option: string) => {
-    if (selectRole.includes(option)) {
-      setSelectRole((prev) => prev.filter((item) => item !== option));
-    } else {
-      setSelectRole((prev) => (prev.length ? [...prev, option] : [option]));
-    }
-  };
+  const { selectQuery: setTaskQuery } = useFilterItems({
+    setSelectQuery: setSelectTask,
+    type: "task",
+  });
+  const { selectQuery: setStatusQuery } = useFilterItems({
+    setSelectQuery: setSelectStatus,
+    type: "status",
+  });
+
   return (
     <div className="">
-      <SelectIndicator count={list.length} />
+      <SelectIndicator count={count} />
       <SelectRow
         title="Task Type"
         list={TASK_LIST}
-        selected={selectRole}
-        onClick={selectUserRole}
+        selected={selectTask}
+        onClick={setTaskQuery}
       />
       <SelectRow
         title="상태"
         list={STATUS_LIST}
-        selected={selectRole}
-        onClick={selectUserRole}
+        selected={selectStatus}
+        onClick={setStatusQuery}
       />
     </div>
   );

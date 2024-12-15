@@ -66,8 +66,6 @@ const UserTaskList = ({ list }: { list: TaskListType[] }) => {
     []
   );
 
-  // const [data, setData] = useState<TaskListType[]>(list);
-  //   const refreshData = () => setData((_old) => makeData(50_000)); //stress test
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const table = useReactTable({
@@ -76,11 +74,13 @@ const UserTaskList = ({ list }: { list: TaskListType[] }) => {
     filterFns: {},
     state: {
       sorting,
-      // columnFilters,
+      pagination: {
+        pageIndex: 0,
+        pageSize: 20,
+      },
     },
-    // onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(), //client side filtering
+    getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,

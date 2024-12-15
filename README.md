@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Task-Demo
 
-## Getting Started
+<img src="https://img.shields.io/badge/Next.js-061629?style=flat-square&logo=Next.js&logoColor=white"/> <img src="https://img.shields.io/badge/Typescript-127EFA?style=flat-square&logo=Typescript&logoColor=white"/> <img src="https://img.shields.io/badge/Tailwindcss-38bdf8?style=flat-square&logo=Tailwindcss&logoColor=white"/>
 
-First, run the development server:
+## 시작하기
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+`pnpm i && pnpm dev`
+
+## 기술 스택
+
+- Frontend
+  - Next.js
+  - Typescript
+  - Forms
+    - react-hook-form
+  - UI / 스타일링
+    - tailwindcss
+    - @radix-ui
+    - @tanstack/react-table"
+  - 상태관리
+    - zustand
+
+## 테스트 케이스
+
+1. eobrien@example.org (Admin)
+
+```
+  - 모든 사용자 리스트 노출
+  - Invite User 버튼 활성화
+  - 모든 Task 리스트가 노출
+  - Create Task버튼 활성화
+  - Task 생성 : 모든 사용자(본인포함)에게 Task 할당가능
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. emma78@example.net (PrimeUser)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+  - 모든 사용자 리스트가 노출
+  - Invite User 버튼 비 활성화
+  - 모든 Task 리스트가 노출
+  - Create Task버튼 활성화
+  - Task 생성 : PrimeUser 이하의 사용자에게 Task 할당 가능
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. morrislucas@example.org (RegularUser)
 
-## Learn More
+```
+  - 본인에 대한 정보만 볼 수 있음
+  - 본인이 생성한 Task 리스트 노출
+  - Create Task버튼 활성화
+  - Task 생성 : 본인에게만 Task 할당 가능
+```
 
-To learn more about Next.js, take a look at the following resources:
+3. nlynch@example.org (Viewer)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+  - 메뉴 접근 금지 (좌측의 메뉴 자체가 비활성화 되어, 리스트에 대한 접근이 불가함)
+  - 본인한테 할당된 Task 만 노출
+  - Create Task버튼 비활성화
+```

@@ -8,7 +8,7 @@ interface CommonTableProps<T> {
 }
 const CommonTable = <T,>({ table, setSorting }: CommonTableProps<T>) => {
   return (
-    <div className="overflow-scroll mt-[80px] flex-1 h-[auto]">
+    <div className="overflow-scroll mt-[80px] flex-1 h-[auto] mb-[80px]">
       <table>
         <thead className="sticky top-[-1px] bg-white">
           {table.getHeaderGroups().map((headerGroup) => (

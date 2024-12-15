@@ -73,7 +73,6 @@ const CreateTask = () => {
         onClose={onClose}
         trigger={
           <button
-            onClick={() => setOpen(true)}
             className={notAllowed ? "btn-disabled" : "btn"}
             disabled={notAllowed}
           >

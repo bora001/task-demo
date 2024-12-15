@@ -32,7 +32,6 @@ const LoginModal = () => {
       const path = MENU_LIST.filter((item) =>
         item.allowList?.includes(userRole)
       );
-      console.log("path", path[0].href ?? MENU_LIST[0].href);
       router.push(path[0].href ?? MENU_LIST[0].href);
     }
   };
